@@ -31,13 +31,13 @@ public class Problem5_DefectiveMarsRover implements Testable, TestingProcedures 
 		if (c>b) return numCommands(a,b);
 		long nc = c;
 		long ans = 0;
-		for(nc=(a/c)*c+c;nc<b;nc+=c) { // nc+c<b didn't count all the operations (always one not enough)
+		for(nc=(a/c)*c+c;nc<b;nc+=c) { // nc+c<b didn't count all the operations (always one less than necessary)
 			if (nc<a) continue;
 			if (nc-c<a) ans+= numCommands(a,nc-1);
 			else ans+=numCommands(nc-1,nc+c-1);
 		}
 		if (nc-c-1<a) return ans+=numCommands(a,b);
-		return ans+=numCommands(nc-c-1,b); // nc-1 was too little operations
+		return ans+=numCommands(nc-c-1,b); // nc-1 counted too little operations
 	
 	}
 
@@ -63,6 +63,7 @@ public class Problem5_DefectiveMarsRover implements Testable, TestingProcedures 
 	}
 	public static void main (String[] args) throws Exception {
 		Tester t = new Tester(Problem5_DefectiveMarsRover.class,"src/Regional_2018/Problem5_Tests");
+		t.TIME_THRESHOLD=3.0;
 		t.test(47);
 		//t.printTestingTimes();
 	}
